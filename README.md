@@ -31,8 +31,15 @@ If you are **setting up the project on your computer** (for class, demos, or dev
 
 ## Preview
 
-HomePage
+**HomePage**
 ![HomePage](./image/homepage.png)
 
-EventPage
+**EventPage**
 ![EventPage](./image/events.png)
+
+**EventDetailPage**
+![EventDetailPage](./image/event-detail.png)
+
+## Disclaimer
+
+This project was originally built as a CS110 class assignment by a team of three students (including me). The version in this repository reflects additional work I remodeled the UI for demonstration purposes.
