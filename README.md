@@ -1,7 +1,7 @@
 # EventConnect
 
 ## Overview
-EventConnect is a website that helps UCR students organize and find on- and off-campus activities. The school provides a list of club activities, all of which take place on campus. Due to limited activity options, many clubs decided to meet outside after their on-campus meetings. FindTheEvent is a place where you can post activities, including going to restaurants, playing games, and watching movies. On this website, only students with their UCR email accounts can create profiles, and everyone can create event posts and manage the number of people who can join these events.
+EventConnect is a website that helps UCR students organize and find on- and off-campus activities. The school provides a list of club activities, all of which take place on campus. Due to limited activity options, many clubs decided to meet outside after their on-campus meetings. EventConnect is a place where you can post activities, including going to restaurants, playing games, and watching movies. On this website, only students with their UCR email accounts can create profiles, and everyone can create event posts and manage the number of people who can join these events.
 
 ## What You Can Do
 
