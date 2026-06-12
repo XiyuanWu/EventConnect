@@ -38,7 +38,7 @@ If you are **setting up the project on your computer** (for class, demos, or dev
 ![EventPage](./image/events.png)
 
 **EventDetailPage**
-![EventDetailPage](./image/event-detail.png)
+![EventDetailPage](./image/event-details.png)
 
 ## Disclaimer
 
