@@ -3,5 +3,7 @@ Django==6.0.4
 sqlparse==0.5.5
 tzdata==2026.2
 python-dotenv==1.2.2
-pymongo==4.17.0
-django-mongodb-backend==6.0.3
+django-allauth==65.14.0
+requests==2.34.2
+PyJWT==2.13.0
+cryptography==48.0.1

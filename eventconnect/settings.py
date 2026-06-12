@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -35,39 +34,21 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-MONGO_URI = os.environ.get("MONGO_URI", "").strip()
-MONGO_DB_NAME = os.environ.get("MONGO_DB_NAME", "eventconnect").strip()
-
-if MONGO_URI:
-    # django-allauth models still use integer PKs; disable until mongo migrations exist.
-    INSTALLED_APPS = [
-        "eventconnect.mongo_apps.MongoAdminConfig",
-        "eventconnect.mongo_apps.MongoAuthConfig",
-        "eventconnect.mongo_apps.MongoContentTypesConfig",
-        "django.contrib.sessions",
-        "django.contrib.messages",
-        "django.contrib.staticfiles",
-        "django_mongodb_backend",
-        "accounts",
-        "events",
-        "eventconnect.mongo_apps.MongoSitesConfig",
-    ]
-else:
-    INSTALLED_APPS = [
-        "django.contrib.admin",
-        "django.contrib.auth",
-        "django.contrib.contenttypes",
-        "django.contrib.sessions",
-        "django.contrib.messages",
-        "django.contrib.staticfiles",
-        "accounts",
-        "events",
-        "django.contrib.sites",
-        "allauth",
-        "allauth.account",
-        "allauth.socialaccount",
-        "allauth.socialaccount.providers.google",
-    ]
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "accounts",
+    "events",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -75,11 +56,10 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-if not MONGO_URI:
-    MIDDLEWARE.append("allauth.account.middleware.AccountMiddleware")
 
 ROOT_URLCONF = 'eventconnect.urls'
 
@@ -103,32 +83,15 @@ WSGI_APPLICATION = 'eventconnect.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-# Set MONGO_URI in .env to use MongoDB Atlas; omit it to fall back to SQLite locally.
 
-if MONGO_URI:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django_mongodb_backend",
-            "HOST": MONGO_URI,
-            "NAME": MONGO_DB_NAME,
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
-    DATABASE_ROUTERS = ["django_mongodb_backend.routers.MongoRouter"]
-    DEFAULT_AUTO_FIELD = "django_mongodb_backend.fields.ObjectIdAutoField"
-    MIGRATION_MODULES = {
-        "admin": "mongo_migrations.admin",
-        "auth": "mongo_migrations.auth",
-        "contenttypes": "mongo_migrations.contenttypes",
-        "sites": "mongo_migrations.sites",
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-    DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+}
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Password validation
@@ -169,21 +132,12 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
-if MONGO_URI:
-    from bson import ObjectId
+SITE_ID = 1
 
-    SITE_ID = ObjectId("000000000000000000000001")
-    SILENCED_SYSTEM_CHECKS = ["sites.E101"]
-else:
-    SITE_ID = 1
-
-if MONGO_URI:
-    AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
-else:
-    AUTHENTICATION_BACKENDS = (
-        "django.contrib.auth.backends.ModelBackend",
-        "allauth.account.auth_backends.AuthenticationBackend",
-    )
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
 
 LOGIN_REDIRECT_URL = 'http://localhost:3000'
 LOGOUT_REDIRECT_URL = 'http://localhost:3000'

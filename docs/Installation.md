@@ -65,23 +65,11 @@ Run migrations:
 python manage.py migrate
 ```
 
-Create your own admin account (optional):
+Create an admin account (required on a fresh clone; `db.sqlite3` is not committed):
 
 ```bash
 python manage.py createsuperuser
 ```
-
-### Default admin account (local / demo only)
-
-A default superuser may already exist for local testing and demos:
-
-| Field | Value |
-|-------|-------|
-| Username | `admin` |
-| Email | `admin@admin.com` |
-| Password | `123` |
-
-Use this only on your own machine or in a demo environment. **Change or remove this account** before sharing, deploying, or using a shared database.
 
 ## 6. Run the Development Server
 

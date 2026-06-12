@@ -108,18 +108,4 @@ Pending decisions:
 - Use Django Templates for all initial UI pages.
 - Keep architecture simple first, then extend features incrementally.
 - This document is a living spec and will be updated as requirements evolve.
-
-### 7.1 Local Development Admin Account
-
-See [Installation.md](Installation.md#default-admin-account-local--demo-only) for the default local/demo superuser credentials and security notes.
-
-### 7.2 Demo User Account (registered)
-
-For demo and walkthrough purposes only. This is a normal user account (not admin), already registered in the database:
-
-| Field | Value |
-|-------|-------|
-| Username | `test` |
-| Password | `test789456123` |
-
-Use only for local demos or class presentations. Do not use this password in production or on a shared/public deployment.
+- On a fresh clone, run migrations and `createsuperuser` to set up local admin access. See [Installation.md](Installation.md#5-database-setup-local-development).
