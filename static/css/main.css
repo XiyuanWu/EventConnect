@@ -512,9 +512,12 @@ a:hover {
 }
 
 .detail-card__hero {
-  height: 120px;
+  min-height: 120px;
+  padding: 1.75rem 1.75rem 1.5rem;
   background: linear-gradient(135deg, var(--primary) 0%, #1a6fd4 50%, #4d9fff 100%);
   position: relative;
+  display: flex;
+  align-items: flex-end;
 }
 
 .detail-card__hero::after {
@@ -524,20 +527,22 @@ a:hover {
   background:
     radial-gradient(circle at 90% 10%, rgba(255, 184, 28, 0.35) 0%, transparent 45%),
     radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.12) 0%, transparent 50%);
+  pointer-events: none;
 }
 
-.detail-card__body {
-  padding: 1.5rem 1.75rem 1.75rem;
-}
-
-.detail-card__body h1 {
-  margin: -2.5rem 0 1.25rem;
+.detail-card__title {
   position: relative;
   z-index: 1;
+  margin: 0;
   font-size: 1.625rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.3;
+  color: #fff;
+}
+
+.detail-card__body {
+  padding: 1.5rem 1.75rem 1.75rem;
 }
 
 .detail-meta {
