@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}EventConnect{% endblock %} · UCR Campus Events</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="{% url 'home' %}" class="brand">
+        <div class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5z"/>
+          </svg>
+        </div>
+        <span class="brand__text">Event<span>Connect</span></span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main">
+        <a href="{% url 'events:event_list' %}"{% if request.resolver_match.url_name == 'event_list' %} class="is-active"{% endif %}>Events</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'events:event_create' %}">Create</a>
+          <a href="{% url 'accounts:profile' %}">Account</a>
+          <a href="{% url 'accounts:logout' %}">Log out</a>
+        {% else %}
+          <a href="{% url 'accounts:login' %}" class="btn-nav">Sign in</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <strong>EventConnect</strong> — Discover and share campus &amp; off-campus events at UCR
+  </footer>
+</body>
+</html>

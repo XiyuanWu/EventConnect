@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+<<<<<<< HEAD
+{% block title %}Create account{% endblock %}
+=======
+    .nav-logo{
+    width: 50px;
+    height: auto;
+    margin-bottom: -5px;
+    margin-top: -15px;
+    }
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 500;
+    }
+
+    .nav-links a:hover {
+        color: #FFB81C;
+    }
+    h2{
+        text-align: center;
+    }
+
+    .btn {
+        background-color: #FFB81C;
+        color: #003DA5;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        min-width: 150px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        width: 100%;
+        box-sizing: border-box;
+        display: inline-block;
+        text-align: center;
+    }
+    .btn:hover {
+        background-color: #e0a319;
+        cursor: pointer;
+    }
+    .event-detail{
+        background-color: #FFFFFF;
+        color: #333333;
+        padding: 30px;
+        border-radius: 4px;
+        max-width: 400px;
+        margin: 40px auto;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .gold-line {
+        width: 100%;
+        height: 3px;
+        background-color: #FFB81C;
+        margin-top: 40px;
+    }
+    input{
+        width: 100%;
+        box-sizing: border-box;
+        display: inline-block;
+        text-align: center;
+    }
+    .log{
+        background-color: #FFFFFF;
+        color: #333333;
+        padding: 30px;
+        border-radius: 4px;
+        max-width: 400px;
+        margin: 40px auto;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        border: 3px solid #FFB81C;
+    }
+    input{
+        padding: 8px;
+        margin-top: 5px;
+        border: 2px solid #003DA5;
+        border-radius: 5px;
+    }
+    .gold-line {
+        width: 100%;
+        height: 3px;
+        background-color: #FFB81C;
+        margin-top: 40px;
+    }
+</style>
+<nav class="navbar">
+    <div class="nav-brand">EventConnect 🌐</div>
+    <div><img src="{% static 'ucr.png' %}" alt="UCR Logo" class="nav-logo"></div>
+    <div class="nav-links">
+        <a href="{% url 'events:event_list' %}">Events</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'events:event_create' %}"> Create Events</a>
+            <a href="{%url 'accounts:profile' %}">Account</a>
+            <a href="{% url 'accounts:login' %}">Log Out</a>
+        {% else %}
+            <a href="{% url 'accounts:login' %}"> Create Events</a>
+            <a href="{% url 'accounts:login' %}">Login</a>
+        {% endif %}
+    </div>
+  </nav>
+>>>>>>> main
+
+{% block content %}
+<div class="container">
+  <div class="form-card">
+    <h1>Create account</h1>
+    <p class="subtitle">Join EventConnect to discover and share campus events.</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert--{% if message.tags %}{{ message.tags }}{% else %}info{% endif %}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    {% if error %}
+      <div class="alert alert--error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label for="confirm_password">Confirm password</label>
+        <input type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password">
+      </div>
+      <button type="submit" class="btn btn--primary">Create account</button>
+    </form>
+
+    <div class="form-footer">
+      Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
