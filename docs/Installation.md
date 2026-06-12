@@ -59,17 +59,24 @@ pip install -r requirements.txt
 
 ## 5. Database Setup (Local Development)
 
+> **Demo note:** For demonstrations, the database may be left **open or shared** so others can clone the repo and explore quickly. **In a real deployment**, you would use a **private database**, environment-specific secrets, and least-privilege access so only the application can reach user data.
+
 Run migrations:
 
 ```bash
 python manage.py migrate
 ```
 
-Create an admin account (required on a fresh clone; `db.sqlite3` is not committed):
+### Demo login (shared / public database)
 
-```bash
-python manage.py createsuperuser
-```
+The repo includes a **shared `db.sqlite3`** with sample data so reviewers can clone and run the app without creating an account. Sign in with:
+
+| Field | Value |
+|-------|-------|
+| Username | `test` |
+| Password | `test789456123` |
+
+Use this only for demos and coursework. **Do not reuse these credentials in production.**
 
 ## 6. Run the Development Server
 

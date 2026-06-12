@@ -20,7 +20,19 @@ If you are **using the live site**, create an account or sign in, then open **Ev
 
 If you are **setting up the project on your computer** (for class, demos, or development), follow the installation guide below.
 
+> **Demo note:** For coursework and live demos, the database may be kept **shared or publicly reachable** so teammates and reviewers can try the app without extra configuration. **In a production environment**, user data would sit in a **private, access-controlled store** with restricted credentials and network access—not exposed for convenience.
+
+**Try the demo:** username `test` · password `test789456123` (see [Installation](docs/Installation.md#demo-login-shared--public-database) for details).
+
 ## Documentation
 
 - [Installation & Usage](docs/Installation.md) — How to install dependencies, connect the database, and run the app locally.
 - [Developer Documentation](docs/dev-doc.md) — Technical scope, architecture, and feature specifications for the team.
+
+## Preview
+
+HomePage
+![HomePage](./image/homepage.png)
+
+EventPage
+![EventPage](./image/events.png)
