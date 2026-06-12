@@ -2,8 +2,10 @@
 Events views (minimal functional MVP).
 """
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Prefetch, Q
+from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import Event, EventComment
@@ -79,6 +81,18 @@ def event_create(request):
             {"error": "All fields are required."},
         )
     return render(request, "events/event_create.html")
+
+
+@login_required
+def event_delete(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    if event.created_by != request.user:
+        return HttpResponseForbidden("You can only delete events you created.")
+    if request.method == "POST":
+        event.delete()
+        messages.success(request, "Event deleted.")
+        return redirect("events:event_list")
+    return redirect("events:event_detail", event_id=event_id)
 
 
 @login_required

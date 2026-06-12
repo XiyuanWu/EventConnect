@@ -257,11 +257,31 @@ a:hover {
   background: var(--primary-soft);
 }
 
+.btn--danger {
+  background: var(--surface);
+  color: var(--danger);
+  border: 1px solid #f5c6c2;
+}
+
+.btn--danger:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
 .btn-group {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 1rem;
+}
+
+.btn-group form {
+  display: flex;
+  margin: 0;
+}
+
+.detail-actions {
+  margin-top: 0;
 }
 
 /* ── Alerts & banners ── */

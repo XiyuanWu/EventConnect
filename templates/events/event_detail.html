@@ -38,7 +38,19 @@
 
           <div class="detail-description">{{ event.description }}</div>
 
-          <a href="{% url 'events:event_list' %}" class="btn btn--secondary">← Back to events</a>
+          <div class="btn-group detail-actions">
+            <a href="{% url 'events:event_list' %}" class="btn btn--secondary">← Back to events</a>
+            {% if user.is_authenticated and user == event.created_by %}
+              <form
+                method="post"
+                action="{% url 'events:event_delete' event.id %}"
+                onsubmit="return confirm('Delete this event? All comments will be removed. This cannot be undone.');"
+              >
+                {% csrf_token %}
+                <button type="submit" class="btn btn--danger">Delete event</button>
+              </form>
+            {% endif %}
+          </div>
         </div>
       </article>
 
