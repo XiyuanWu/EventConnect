@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="form-card form-card--wide">
+    <h1>Edit event</h1>
+    <p class="subtitle">Update the details for this event.</p>
+
+    {% if error %}
+      <div class="alert alert--error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" required value="{{ event.title }}" placeholder="e.g. Study group at Rivera Library">
+      </div>
+      <div class="form-group">
+        <label for="starts_at">Date &amp; time</label>
+        <input type="datetime-local" id="starts_at" name="starts_at" required value="{{ event.starts_at|date:'Y-m-d\TH:i' }}">
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" required value="{{ event.location }}" placeholder="e.g. UCR Bell Tower, Riverside">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" required placeholder="What should people know about this event?">{{ event.description }}</textarea>
+      </div>
+      <div class="btn-group">
+        <button type="submit" class="btn btn--primary">Save changes</button>
+        <a href="{% url 'events:event_detail' event.id %}" class="btn btn--secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

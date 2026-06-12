@@ -84,6 +84,32 @@ def event_create(request):
 
 
 @login_required
+def event_edit(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    if event.created_by != request.user:
+        return HttpResponseForbidden("You can only edit events you created.")
+    if request.method == "POST":
+        title = request.POST.get("title", "").strip()
+        starts_at = request.POST.get("starts_at", "").strip()
+        location = request.POST.get("location", "").strip()
+        description = request.POST.get("description", "").strip()
+        if title and starts_at and location and description:
+            event.title = title
+            event.starts_at = starts_at
+            event.location = location
+            event.description = description
+            event.save()
+            messages.success(request, "Event updated.")
+            return redirect("events:event_detail", event_id=event.id)
+        return render(
+            request,
+            "events/event_edit.html",
+            {"event": event, "error": "All fields are required."},
+        )
+    return render(request, "events/event_edit.html", {"event": event})
+
+
+@login_required
 def event_delete(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     if event.created_by != request.user:
